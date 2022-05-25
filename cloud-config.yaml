@@ -1,0 +1,26 @@
+packages:
+  - docker.io
+  - docker-compose
+
+write_files:
+  - path: /etc/sysctl.conf
+    owner: root
+    permission: 0644
+    content: |
+      fs.inotify.max_user_watches = 524288
+    append: true
+  - path: /home/ubuntu/.inputrc
+    owner: ubuntu
+    permission: 0644
+    content: |
+      set editing-mode emacs
+      set completion-ignore-case off
+      set show-all-if-unmodified on
+      "\C-p": history-search-backward
+      "\C-n": history-search-forward
+      "\e[A": history-search-backward
+      "\e[B": history-search-forward
+    append: true
+
+runcmd:
+  - usermod -aG docker ubuntu
