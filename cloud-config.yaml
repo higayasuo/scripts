@@ -24,3 +24,5 @@ write_files:
 
 runcmd:
   - usermod -aG docker ubuntu
+  - echo 'export PS1="\u@\h:\W$ "' >> /home/ubuntu/.bashrc
+  - echo 'source /home/ubuntu/.bashrc' >> /home/ubuntu/.bash_profile
