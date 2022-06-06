@@ -2,6 +2,8 @@ packages:
   - docker.io
   - docker-compose
 
+package_update: true
+
 write_files:
   - path: /etc/sysctl.conf
     owner: root
@@ -10,7 +12,7 @@ write_files:
       fs.inotify.max_user_watches = 524288
     append: true
   - path: /home/ubuntu/.inputrc
-    owner: ubuntu
+    owner: ubuntu:ubuntu
     permission: 0644
     content: |
       set editing-mode emacs
@@ -26,3 +28,5 @@ runcmd:
   - usermod -aG docker ubuntu
   - echo 'export PS1="\u@\h:\W$ "' >> /home/ubuntu/.bashrc
   - echo 'source /home/ubuntu/.bashrc' >> /home/ubuntu/.bash_profile
+  - chown -R ubuntu:ubuntu /home/ubuntu
+  - DBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages dist-upgrade
