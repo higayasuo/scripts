@@ -26,7 +26,8 @@ write_files:
 
 runcmd:
   - usermod -aG docker ubuntu
-  - echo 'export PS1="\u@\h:\W$ "' >> /home/ubuntu/.bashrc
+  - echo "export PROMPT_DIRTRIM=2" >> /home/ubuntu/.bashrc
+  - echo 'export PS1="\w$ "' >> /home/ubuntu/.bashrc
   - echo 'source /home/ubuntu/.bashrc' >> /home/ubuntu/.bash_profile
   - chown -R ubuntu:ubuntu /home/ubuntu
   - DBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages dist-upgrade
