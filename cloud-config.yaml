@@ -25,6 +25,7 @@ write_files:
     append: true
 
 runcmd:
+  - sysctl -p
   - usermod -aG docker ubuntu
   - echo "export PROMPT_DIRTRIM=2" >> /home/ubuntu/.bashrc
   - echo 'export PS1="\w$ "' >> /home/ubuntu/.bashrc
