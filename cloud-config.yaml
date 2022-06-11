@@ -5,12 +5,6 @@ packages:
 package_update: true
 
 write_files:
-  - path: /etc/sysctl.conf
-    owner: root
-    permission: 0644
-    content: |
-      fs.inotify.max_user_watches = 524288
-    append: true
   - path: /home/ubuntu/.inputrc
     owner: ubuntu:ubuntu
     permission: 0644
@@ -25,7 +19,7 @@ write_files:
     append: true
 
 runcmd:
-  - sysctl -p
+  - echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf && sysctl -p
   - usermod -aG docker ubuntu
   - echo "export PROMPT_DIRTRIM=2" >> /home/ubuntu/.bashrc
   - echo 'export PS1="\w$ "' >> /home/ubuntu/.bashrc
