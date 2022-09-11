@@ -30,7 +30,7 @@ $ pwd
 ```
 $ yarn ts-node src/account/generateAccount.ts
 ```
-次のような出力結果が得られればセットアップはあうまく言っています。AddressとMnemonicの内容は違っていても大丈夫です。
+次のような出力結果が得られればセットアップはうまく言っています。AddressとMnemonicの内容は違っていても大丈夫です。
 ```
 Address: 3ROUHFNMWPR33UY5KORTJ5OXFVB7CXGTWO2L2O3IKLQDYRHFR7U2PTU2CM
 Mnemonic: panel coast border cloth good blood room across vehicle cost punch below parrot curve industry suffer urge evolve broom hill duty label easily absorb cool
