@@ -1,3 +1,7 @@
+packages:
+  - docker.io
+  - docker-compose
+
 package_update: true
 
 write_files:
@@ -16,21 +20,9 @@ write_files:
 
 runcmd:
   - echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf && sysctl -p
+  - usermod -aG docker ubuntu
   - echo "export PROMPT_DIRTRIM=2" >> /home/ubuntu/.bashrc
   - echo 'export PS1="\w$ "' >> /home/ubuntu/.bashrc
   - echo 'source /home/ubuntu/.bashrc' >> /home/ubuntu/.bash_profile
   - chown -R ubuntu:ubuntu /home/ubuntu
   - DBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages dist-upgrade
-  - sudo apt remove docker docker-engine docker.io containerd runc docker-compose
-  - sudo apt-get update
-  - sudo apt-get install -y ca-certificates curl gnupg lsb-release
-  - sudo install -m 0755 -d /etc/apt/keyrings
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-  - sudo chmod a+r /etc/apt/keyrings/docker.gpg
-  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  - sudo apt update
-  - sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-  - sudo usermod -aG docker ubuntu
-
-
-
